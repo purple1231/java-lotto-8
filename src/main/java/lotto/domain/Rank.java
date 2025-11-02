@@ -1,10 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
 public enum Rank {
 
     FIRST(6, 2_000_000_000L, "6개 일치 (2,000,000,000원)"),

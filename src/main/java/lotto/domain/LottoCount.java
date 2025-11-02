@@ -1,6 +1,9 @@
 package lotto.domain;
 
-import lotto.validator.InputValidator;
+
+
+
+
 
 public class LottoCount {
     private final int money;

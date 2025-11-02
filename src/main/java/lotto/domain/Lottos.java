@@ -13,12 +13,8 @@ public class Lottos {
     public List<Lotto> getLottos() {
         return lottos;
     }
+    public int getSize(){
+        return lottos.size();
+    }
 
-
-
-//    private void calculateRank(LottoAnswer lottoAnswer){
-//        for(Lotto lotto: lottos){
-//
-//        }
-//    }
 }

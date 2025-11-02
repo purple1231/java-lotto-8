@@ -46,11 +46,11 @@ public class LottoResult {
     }
 
     //총 당첨금
-    public int getTotalPrizeMoney(){
-        int totalPrize = 0;
+    public long getTotalPrizeMoney(){
+        long totalPrize = 0L;
         // key
-        for(Rank rank : rankStatus.keySet()){
-            totalPrize += rank.getPrizeMoney() * rankStatus.get(rank); // value
+        for (Rank rank : rankStatus.keySet()) {
+            totalPrize += rank.getPrizeMoney() * rankStatus.get(rank); // ✅ OK
         }
         return totalPrize;
     }

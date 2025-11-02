@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.InputView;
+import lotto.OutputView;
 import lotto.domain.LottoAnswer;
 import lotto.domain.LottoResult;
 import lotto.domain.Lottos;
@@ -11,23 +12,49 @@ import java.util.List;
 
 public class LottoController {
     private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
     private final LottoMachineService lottoService = new LottoMachineService();
 
     LottoCount purchaseAmount;
 
 
     public void run(){
-        int money = inputView.readMoney();
-        purchaseAmount = new LottoCount(money);
-        Lottos lottos = lottoService.run(purchaseAmount);
 
-        //여기에 아웃풋뷰로 lottos 출력.
+        LottoCount lottoCount = createValidatedLottoCount();
+        Lottos lottos = lottoService.run(lottoCount);
 
-        //여기에 정답 받기!
-        List<Integer> answerNumber = inputView.readAnswer();
-        int answerBonusNumber = inputView.readBonusAnswer();
-        LottoAnswer lottoAnswer = new LottoAnswer(answerNumber, answerBonusNumber);
+        outputView.printLottosCount(lottoCount);
+        outputView.printLottos(lottos);
+
+        LottoAnswer lottoAnswer = createValidatedLottoAnswer();
+
         LottoResult lottoResult = new LottoResult(lottoAnswer, lottos);
-
+        outputView.printLottoResult(lottoResult, lottoCount);
     }
+
+
+    private LottoCount createValidatedLottoCount(){
+        while (true){
+            try{
+                int money = inputView.readMoney();
+                return new LottoCount(money);
+
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    private LottoAnswer createValidatedLottoAnswer(){
+        while (true){
+            try{
+                List<Integer> answerNumber = inputView.readAnswer();
+                int answerBonusNumber = inputView.readBonusAnswer();
+                return new LottoAnswer(answerNumber, answerBonusNumber);
+
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 }

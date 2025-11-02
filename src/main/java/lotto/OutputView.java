@@ -7,14 +7,14 @@ import java.util.Map;
 public class OutputView {
 
     public void printLottosCount(LottoCount lottoCount){
-        System.out.println(lottoCount.getAmount() + "개를 구매했습니다.");
+        System.out.printf("\n%d개를 구매했습니다.\n", lottoCount.getAmount());
     }
 
     public void printLottos(Lottos lottos){
         for(Lotto lotto : lottos.getLottos()){
             System.out.println(lotto.getNumbers());
         }
-
+        System.out.println();
     }
 
     public void printLottoResult(LottoResult lottoResult, LottoCount lottoCount){
@@ -30,6 +30,6 @@ public class OutputView {
         System.out.printf("%s - %d개\n", Rank.FIRST.getDisplayName(), rankStatus.get(Rank.FIRST));
 
         double rate = lottoResult.calculateRate(lottoCount.getMoney());
-        System.out.printf("총 수익률은 %.1f%%입니다.\n", rate);
+        System.out.printf("총 수익률은 %.1f%%입니다.", rate);
     }
 }
